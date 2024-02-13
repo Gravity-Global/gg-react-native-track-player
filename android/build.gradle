@@ -50,7 +50,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.doublesymmetry:kotlinaudio:v2.0.0'
+    // implementation 'com.github.lovegaoshi:KotlinAudio:v3-media3-1'
     // used when building against local maven
 //    implementation "com.github.doublesymmetry:kotlin-audio:2.0.0"
 
@@ -58,8 +58,18 @@ dependencies {
     implementation "com.facebook.react:react-native:+"
 
     // Make sure we're using androidx
+    implementation 'io.coil-kt:coil:2.2.0'
     implementation "androidx.core:core-ktx:1.9.0"
     implementation "androidx.localbroadcastmanager:localbroadcastmanager:1.1.0"
     implementation "androidx.lifecycle:lifecycle-process:2.5.1"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.3"
+    implementation 'androidx.media:media:1.7.0'
+    api 'androidx.media3:media3-exoplayer:1.2.1'
+    implementation 'androidx.media3:media3-exoplayer:1.2.1'
+    implementation 'androidx.media3:media3-exoplayer-dash:1.2.1'
+    implementation 'androidx.media3:media3-exoplayer-hls:1.2.1'
+    implementation 'androidx.media3:media3-exoplayer-smoothstreaming:1.2.1'
+    implementation 'androidx.media3:media3-session:1.2.1'
+    api 'androidx.media3:media3-ui:1.2.1'
+    api 'com.jakewharton.timber:timber:5.0.1'
 }
