@@ -1,4 +1,4 @@
-package com.doublesymmetry.trackplayer.service
+@file: OptIn(UnstableApi::class) package com.doublesymmetry.trackplayer.service
 
 import android.app.*
 import android.content.Context
@@ -11,8 +11,10 @@ import android.os.Bundle
 import android.os.IBinder
 import android.support.v4.media.RatingCompat
 import androidx.annotation.MainThread
+import androidx.annotation.OptIn
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationCompat.PRIORITY_LOW
+import androidx.media3.common.util.UnstableApi
 import com.doublesymmetry.kotlinaudio.models.*
 import com.doublesymmetry.kotlinaudio.models.NotificationButton.*
 import com.doublesymmetry.kotlinaudio.players.QueuedAudioPlayer
@@ -33,7 +35,7 @@ import com.facebook.react.HeadlessJsTaskService
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.jstasks.HeadlessJsTaskConfig
 import com.facebook.react.modules.core.DeviceEventManagerModule
-import com.google.android.exoplayer2.ui.R as ExoPlayerR
+import androidx.media3.ui.R as ExoPlayerR
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.flow
 import java.util.concurrent.TimeUnit
@@ -69,12 +71,6 @@ class MusicService : HeadlessJsTaskService() {
 
     val state
         get() = player.playerState
-
-    var ratingType: Int
-        get() = player.ratingType
-        set(value) {
-            player.ratingType = value
-        }
 
     val playbackError
         get() = player.playbackError
@@ -178,8 +174,6 @@ class MusicService : HeadlessJsTaskService() {
                 appKilledPlaybackBehavior = AppKilledPlaybackBehavior.PAUSE_PLAYBACK
             }
         }
-
-        ratingType = BundleUtils.getInt(options, "ratingType", RatingCompat.RATING_NONE)
 
         player.playerOptions.alwaysPauseOnInterruption = androidOptions?.getBoolean(PAUSE_ON_INTERRUPTION_KEY) ?: false
 
