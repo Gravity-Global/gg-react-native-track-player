@@ -18,6 +18,8 @@ const onUpdateCurrentTrackMetadata = async (bugfix = true) => {
     await TrackPlayer.updateMetadataForTrack(
       currentTrackIndex,
       {
+        title: 'foo',
+        artist: 'bar',
         artwork: `https://rntp.dev/example/Longing.jpeg`,
       },
       bugfix
