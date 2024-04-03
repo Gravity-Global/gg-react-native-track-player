@@ -7,20 +7,21 @@ import TrackPlayer from 'react-native-track-player';
 const onUpdateNotificationMetadata = async () => {
   const randomTitle = Math.random().toString(36).substring(7);
   await TrackPlayer.updateNowPlayingMetadata({
-    title: `Random: ${randomTitle}`,
-    artwork: `https://random.imagecdn.app/800/800?dummy=${Date.now()}`,
+    artwork: `https://rntp.dev/example/Longing.jpeg`,
   });
 };
 
-const onUpdateCurrentTrackMetadata = async () => {
+const onUpdateCurrentTrackMetadata = async (bugfix = true) => {
   const currentTrackIndex = await TrackPlayer.getActiveTrackIndex();
   if (currentTrackIndex !== undefined) {
     const randomTitle = Math.random().toString(36).substring(7);
-    await TrackPlayer.updateMetadataForTrack(currentTrackIndex, {
-      title: `Random: ${randomTitle}`,
-      artwork: `https://random.imagecdn.app/800/800?dummy=${Date.now()}`,
-      duration: Math.floor(Math.random()),
-    });
+    await TrackPlayer.updateMetadataForTrack(
+      currentTrackIndex,
+      {
+        artwork: `https://rntp.dev/example/Longing.jpeg`,
+      },
+      bugfix
+    );
   }
 };
 
@@ -40,6 +41,11 @@ export const ActionSheet: React.FC = () => {
       <Button
         title={'Update Current Track Metadata Randomly'}
         onPress={onUpdateCurrentTrackMetadata}
+        type={'primary'}
+      />
+      <Button
+        title={'Update Current Track Metadata (bugged)'}
+        onPress={() => onUpdateCurrentTrackMetadata(false)}
         type={'primary'}
       />
       <Button title={'Reset'} onPress={onReset} type={'primary'} />

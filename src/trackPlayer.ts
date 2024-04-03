@@ -251,12 +251,21 @@ export async function updateOptions({
  */
 export async function updateMetadataForTrack(
   trackIndex: number,
-  metadata: TrackMetadataBase
+  metadata: TrackMetadataBase,
+  bugfix = true
 ): Promise<void> {
-  return TrackPlayer.updateMetadataForTrack(trackIndex, {
+  const currentTrackIndex = await TrackPlayer.getActiveTrackIndex();
+  await TrackPlayer.updateMetadataForTrack(trackIndex, {
     ...metadata,
     artwork: resolveImportedAssetOrPath(metadata.artwork),
   });
+  if (bugfix && currentTrackIndex === trackIndex) {
+    TrackPlayer.updateNowPlayingMetadata({
+      ...metadata,
+      artwork: resolveImportedAssetOrPath(metadata.artwork),
+    });
+  }
+  return;
 }
 
 /**
